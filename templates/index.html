@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask TODO app</title>
+</head>
+<body >
+    <div style="height:0;width:40%;padding-bottom:20%;background-color:rgb(105, 55, 55);color: azure;margin: auto;border: 3px solid green;justify-content: center;">
+    <div style="justify-content: center; align-items: center; ">
+    <h1 style="font-weight: 200;color: azure;">Todos</h1>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                <input type="checkbox" name="done" {% if todo['done'] %} checked {% endif %} disabled onchange="this.form.submit()">
+                 <span {% if todo['done'] %} style="text-decoration: line-through" {% endif %}>{{ todo['task'] }}</span>
+                 <a href=" {{ url_for('check' , index= loop.index0)}}" style="color: bisque;"> CHECK |</a>
+                 <a href=" {{ url_for('edit' , index= loop.index0)}}" style="color: bisque;">EDIT |</a>
+                 <a href=" {{ url_for('delete' , index= loop.index0)}}" style="color: bisque;"> DELETE </a>
+            </li>
+        {% endfor%}
+    </ul>
+    <form action="{{url_for('add')}}" method="post" > 
+        <input type="text" name="todo" >
+        <button type="submit" style="background: rgb(78, 210, 78);" >ADD Todo </button>
+    </form>
+    </div>
+</div>
+</body>
+</html>
